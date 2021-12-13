@@ -1,0 +1,63 @@
+[Arguments]
+
+port = 8098
+env = 3dfacefill
+same_env = Yes
+log_type = progressbar
+save_results = Yes
+result_path = "./results"
+
+# dataset options
+dataroot = /research/hal-datastage/datasets/processed/CelebA/celebahq_crop/all_images/
+dataset_train = Faces
+dataset_test = Faces
+train_dev_percent = 0.80
+batch_size = 28
+
+# model options
+model_type = 3dmm_pca
+loss_type = _3DMM
+
+resolution = [224, 224]
+output_resolution = [224, 224]
+texture_size = [192, 256]
+nchannels = 3
+ndf = 32
+ndfc = 512
+ngf = 32
+ngfc = 512
+ndim = 50
+n_groupnorm = 4
+n_disc_layers = 5
+
+mdim = 6
+ildim = 27
+vertex_num = 53215
+landmark_num = 68
+tri_num = 105840
+const_pixels_num = 20
+
+# optimizer options
+optim_method = Adam
+learning_rate = 0.0001
+optim_options = {"weight_decay": 4e-5, "betas": [0.5, 0.999]}
+scheduler_method = ExponentialLR
+scheduler_options = {"gamma": 0.98}
+
+# training options
+tex_loss = l1
+recon_loss = l1
+is_using_symmetry = True
+is_using_recon = True
+is_using_frecon = False
+
+manual_seed = 0
+nepochs = 500
+
+# cpu/gpu settings
+ngpu = 2
+nthreads = 20
+
+# model resume
+_3dmm_ckpt = checkpoints/_3dmm_34.pth
+occ_ckpt = checkpoints/occ_ckpt.pth
